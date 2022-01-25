@@ -21,7 +21,7 @@
 </div>
 <div>Поиск по тегу:</div>
 <form method="get" action="/index">
-    <input type="text" name="filter" value="${filter}">
+    <input type="text" name="filter" value="${filter!}">
     <button type="submit">Найти</button>
 </form>
 
