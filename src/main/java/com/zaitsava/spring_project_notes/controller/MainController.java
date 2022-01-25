@@ -6,6 +6,7 @@ import com.zaitsava.spring_project_notes.repository.MassageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,10 +24,15 @@ public class MainController {
     }
 
     @GetMapping("/index")
-    public String main(Map<String, Object> model) {
+    public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
         Iterable<Message> massages = massageRepository.findAll();
-
-        model.put("messages", massages);
+        if (filter != null && !filter.isEmpty()) {
+            massages = massageRepository.findByTag(filter);
+        } else {
+            massages = massageRepository.findAll();
+        }
+        model.addAttribute("messages", massages);
+        model.addAttribute("filter", filter);
         return "index";
     }
 
@@ -44,16 +50,5 @@ public class MainController {
 
     }
 
-    @PostMapping("/filter")
-    public String filter(@RequestParam String filter, Map<String, Object> model) {
-        Iterable<Message> massages;
 
-        if (filter != null && !filter.isEmpty()) {
-            massages = massageRepository.findByTag(filter);
-        } else {
-            massages = massageRepository.findAll();
-        }
-        model.put("messages", massages);
-        return "index";
-    }
 }

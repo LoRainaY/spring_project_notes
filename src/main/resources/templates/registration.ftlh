@@ -1,3 +1,4 @@
+<#import "parts/registration.ftlh" as r>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -225,21 +226,9 @@
 
 </head>
 <body>
-Add new user
 
-<form action="/registration" method="post" id="reg">
-    <fieldset id="inputs">
-        <h1>Регистрация</h1>
-    <div><label> User Name : <input type="text" name="username" id="username"/> </label></div>
-    <div id="errors" style="color: red">
-        {{#message}}
-            {{message}}
-        {{/message}}
-    </div>
-    <div><label> Password: <input type="password" name="password" id="password"/> </label></div>
-    <input type="hidden" name="_csrf" value="{{_csrf.token}}"></fieldset>
-    <fieldset id="actions">
-    <div><input type="submit" value="Зарегистрировать" id="submit"/></div></fieldset>
-</form>
+<@r.reg/>
+
+
 </body>
 </html>

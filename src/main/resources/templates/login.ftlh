@@ -1,3 +1,6 @@
+<#import "parts/login.ftlh" as l>
+
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -222,18 +225,7 @@
 
 </head>
 <body>
-Login page
-<form action="/login" method="post" id="login">
-    <fieldset id="inputs">
-    <h1>Вход в систему</h1>
-    <div><label> Логин: <input type="text" name="username" id="username" placeholder="Username" autofocus required/></label></div>
-    <div><label> Пароль: <input type="password" name="password" id="password" placeholder="Password" required/> </label></div>
-    </fieldset>
-    <fieldset id="actions">
-        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
-    <div><input type="submit" value="Вход" id="submit"/></div>
-        <div><a href="/registration">Регистрация</a></div></fieldset>
-</form>
 
+<@l.login "/login"/>
 </body>
 </html>
