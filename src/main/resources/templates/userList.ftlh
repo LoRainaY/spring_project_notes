@@ -12,9 +12,9 @@
         <caption>Список пользователей</caption>
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Role</th>
-            <th></th>
+            <th>Логин</th>
+            <th>Роль</th>
+            <th class="col3">Операция</th>
         </tr>
         </thead>
         <tbody>
@@ -22,7 +22,11 @@
             <tr>
                 <td>${user.username}</td>
                 <td><#list user.roles as role>${role}<#sep>, </#list></td>
-                <td><a href="/user/${user.id}">edit</a></td>
+                <td><form action="/user/${user.id}">
+                        <button type="submit">Редактировать</button></form>
+                    <form action="/user/remove/${user.id}">
+                        <button type="submit">Удалить</button>
+                    </form></td>
             </tr>
         </#list>
         </tbody>

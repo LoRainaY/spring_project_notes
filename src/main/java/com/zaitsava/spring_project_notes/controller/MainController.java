@@ -8,6 +8,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -49,6 +50,15 @@ public class MainController {
         return "index";
 
     }
+    @GetMapping("/index/{user}")
+    public String userDelete(@PathVariable User user, Model model) {
+        Iterable<Message> userMessage = massageRepository.findByAuthor(user);
+        model.addAttribute("messages", userMessage);
+
+        return "index";
+    }
+
+
 
 
 }

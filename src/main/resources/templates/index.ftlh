@@ -8,7 +8,7 @@
 <body>
 <@l.logout/>
 <div style="float: right; margin-left: 30px">
-    <form action="/user" method="get">
+    <form action="/user" method="get" acc>
         <input type="hidden" name="_csrf" value="${_csrf.token}">
         <input type="submit" value="Просмотр пользователей"/>
     </form>

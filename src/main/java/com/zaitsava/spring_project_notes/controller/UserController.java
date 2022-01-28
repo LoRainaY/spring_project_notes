@@ -1,7 +1,9 @@
 package com.zaitsava.spring_project_notes.controller;
 
+import com.zaitsava.spring_project_notes.entity.Message;
 import com.zaitsava.spring_project_notes.entity.Role;
 import com.zaitsava.spring_project_notes.entity.User;
+import com.zaitsava.spring_project_notes.repository.MassageRepository;
 import com.zaitsava.spring_project_notes.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,6 +22,8 @@ import java.util.stream.Collectors;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private MassageRepository massageRepository;
 
     @GetMapping
     public String userList(Model model) {
@@ -58,6 +62,14 @@ public class UserController {
 
         userRepository.save(user);
 
+        return "redirect:/user";
+    }
+    @GetMapping("/remove/{user}")
+    public String userDelete(@PathVariable User user, Model model) {
+        Iterable<Message> deleteMessage = massageRepository.findByAuthor(user);
+        massageRepository.deleteAll(deleteMessage);
+        user.getRoles().clear();
+        userRepository.delete(user);
         return "redirect:/user";
     }
 }
