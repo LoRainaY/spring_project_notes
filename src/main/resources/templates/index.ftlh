@@ -3,12 +3,20 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Main</title>
-    <link rel="stylesheet" type="text/css" href="/css/index.css"/>
+    <link rel='stylesheet' href='/css/index.css'>
 </head>
 <body>
 <@l.logout/>
+<div style="float: right; margin-left: 30px">
+    <form action="/user" method="get">
+        <input type="hidden" name="_csrf" value="${_csrf.token}">
+        <input type="submit" value="Просмотр пользователей"/>
+    </form>
+</div>
 
 <div>
+    <details>
+        <summary>Добавить закладку</summary>
     <form method="post">
 
         <input type="text" name="tag" placeholder="Тэг"><br><br>
@@ -17,7 +25,7 @@
         <input type="hidden" name="_csrf" value="${_csrf.token}">
         <button type="submit">Добавить заметку</button>
 
-    </form>
+    </form></details>
 </div>
 <div>Поиск по тегу:</div>
 <form method="get" action="/index">
